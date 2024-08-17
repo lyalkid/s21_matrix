@@ -43,6 +43,20 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
 }
 
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
+    int code = is_matrix_correct(A) || is_matrix_correct(B);
+    if(code != ERROR && A -> rows == B -> rows && A -> columns == B -> columns){
+        int rows = A ->rows, cols = A -> columns;
+        code = s21_create_matrix(rows, cols, result);
+        for(int i= 0; code != ERROR && i < result ->rows; i++){
+            for(int j = 0; result -> columns; j++){
+                result -> matrix[i][j] = A -> matrix[i][j] + B -> matrix[i][j];
+            }
+        }
+    }
+    else if(A -> rows == B -> rows || A -> columns == B -> columns){
+        code = CALC_ERROR;
+    }
+    return code;
 }
 
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {}
@@ -55,15 +69,13 @@ int is_sizes_equals(matrix_t *A, matrix_t *B) {
   return code;
 }
 
-int is_matrtix_correct(matrix_t *A) {
+int is_matrix_correct(matrix_t *A) {
   int status_code = OK;
-  if (A == NULL || (&A->columns == NULL) || (&A->rows == NULL) ||
-      (A->rows <= 0) || (A->columns <= 0) || (A->matrix == NULL)) {
+  if (A == NULL || (A->rows <= 0) || (A->columns <= 0) || (A->matrix == NULL)) {
     status_code = ERROR;
-  }
-  else {
-    for(int i =0 ; i < A->rows; i++) {
-      if(A -> matrix[i] == NULL) {
+  } else {
+    for (int i = 0; i < A->rows; i++) {
+      if (A->matrix[i] == NULL) {
         status_code = ERROR;
         break;
       }

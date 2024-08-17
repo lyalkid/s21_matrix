@@ -24,6 +24,7 @@ enum eq{FAILURE, SUCCESS};
 #define eps 1e-7
 int s21_eq_matrix(matrix_t *A, matrix_t *B);
 int is_sizes_equals(matrix_t* A, matrix_t* B);
+int is_matrix_correct(matrix_t *A);
 
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result);

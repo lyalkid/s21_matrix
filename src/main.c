@@ -22,8 +22,10 @@ int main() {
     for (int i = 0; i < num_matrices; i++) {
       matrices[i] = read_matrix_from_file(file);
     }
-
+    matrix_t  result = {};
     int res = s21_eq_matrix(&matrices[0], &matrices[1]);
     res ? printf("EQUALS\n") : printf("NOT EQUALS\n");
+    res = s21_sum_matrix(&matrices[0], &matrices[1], &result);
+
   }
 }
