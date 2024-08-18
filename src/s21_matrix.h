@@ -9,7 +9,7 @@
  * 2 - Calculation error (mismatched matrix sizes; matrix for which calculations cannot be performed, etc.)
  * */
 enum status{OK, ERROR, CALC_ERROR};
-
+enum s21_status{S21_OK, S21_INCORRECT, S21_CALC_ERROR};
 typedef struct matrix_struct {
     int rows;
     int columns;

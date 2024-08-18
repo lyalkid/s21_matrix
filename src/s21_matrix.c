@@ -1,7 +1,7 @@
 #include "s21_matrix.h"
 
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
-  if (rows <= 0 || columns <= 0) return ERROR;
+  if (rows <= 0 || columns <= 0 || !result) return ERROR;
   result->columns = columns;
   result->rows = rows;
   double **matrix = malloc(rows * (sizeof(double *)));
@@ -15,10 +15,13 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
 }
 
 void s21_remove_matrix(matrix_t *A) {
+
   for (int i = 0; i < A->rows; i++) {
     free(A->matrix[i]);
   }
   free(A->matrix);
+  A->matrix = NULL;
+  A -> rows = 0, A->columns = 0;
 }
 
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
@@ -48,18 +51,33 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
         int rows = A ->rows, cols = A -> columns;
         code = s21_create_matrix(rows, cols, result);
         for(int i= 0; code != ERROR && i < result ->rows; i++){
-            for(int j = 0; result -> columns; j++){
+            for(int j = 0;  j < result -> columns; j++){
                 result -> matrix[i][j] = A -> matrix[i][j] + B -> matrix[i][j];
             }
         }
     }
-    else if(A -> rows == B -> rows || A -> columns == B -> columns){
+    else if(A -> rows != B -> rows || A -> columns != B -> columns){
         code = CALC_ERROR;
     }
     return code;
 }
 
-int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {}
+int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
+  int code = is_matrix_correct(A) || is_matrix_correct(B);
+  if(code != ERROR && A -> rows == B -> rows && A -> columns == B -> columns){
+    int rows = A ->rows, cols = A -> columns;
+    code = s21_create_matrix(rows, cols, result);
+    for(int i= 0; code != ERROR && i < result ->rows; i++){
+      for(int j = 0; j < result -> columns; j++){
+        result -> matrix[i][j] = A -> matrix[i][j] - B -> matrix[i][j];
+      }
+    }
+  }
+  else if(A -> rows != B -> rows || A -> columns != B -> columns){
+    code = CALC_ERROR;
+  }
+  return code;
+}
 
 int is_sizes_equals(matrix_t *A, matrix_t *B) {
   int code = SUCCESS;
