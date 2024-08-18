@@ -46,28 +46,25 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
 }
 
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-    int code = is_matrix_correct(A) || is_matrix_correct(B);
-    if(code != ERROR && A -> rows == B -> rows && A -> columns == B -> columns){
+    int code = is_matrices_both_correct(A, B);
+    if(code == OK ){
         int rows = A ->rows, cols = A -> columns;
         code = s21_create_matrix(rows, cols, result);
-        for(int i= 0; code != ERROR && i < result ->rows; i++){
+        for(int i= 0; code == OK && i < result ->rows; i++){
             for(int j = 0;  j < result -> columns; j++){
                 result -> matrix[i][j] = A -> matrix[i][j] + B -> matrix[i][j];
             }
         }
     }
-    else if(A -> rows != B -> rows || A -> columns != B -> columns){
-        code = CALC_ERROR;
-    }
     return code;
 }
 
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-  int code = is_matrix_correct(A) || is_matrix_correct(B);
-  if(code != ERROR && A -> rows == B -> rows && A -> columns == B -> columns){
+  int code = is_matrices_both_correct(A, B);
+  if(code == OK){
     int rows = A ->rows, cols = A -> columns;
     code = s21_create_matrix(rows, cols, result);
-    for(int i= 0; code != ERROR && i < result ->rows; i++){
+    for(int i= 0; code == OKй && i < result ->rows; i++){
       for(int j = 0; j < result -> columns; j++){
         result -> matrix[i][j] = A -> matrix[i][j] - B -> matrix[i][j];
       }
@@ -89,9 +86,10 @@ int is_sizes_equals(matrix_t *A, matrix_t *B) {
 
 int is_matrix_correct(matrix_t *A) {
   int status_code = OK;
-  if (A == NULL || (A->rows <= 0) || (A->columns <= 0) || (A->matrix == NULL)) {
-    status_code = ERROR;
-  } else {
+  if (A == NULL ||  (A->matrix == NULL) || A->rows <= 0 || A -> columns <=0) {
+      status_code = ERROR;
+  }
+  else {
     for (int i = 0; i < A->rows; i++) {
       if (A->matrix[i] == NULL) {
         status_code = ERROR;
@@ -100,4 +98,15 @@ int is_matrix_correct(matrix_t *A) {
     }
   }
   return status_code;
+}
+
+int is_matrices_both_correct(matrix_t *A, matrix_t *B ){
+    int code1 = is_matrix_correct(A), code2 = is_matrix_correct(B);
+    int status_code = OK;
+    if(code1 == ERROR || code2 == ERROR){
+        status_code = ERROR;
+    } else if( A -> rows != B -> rows || A -> columns != B ->columns){
+        status_code = CALC_ERROR;
+    }
+    return status_code;
 }
