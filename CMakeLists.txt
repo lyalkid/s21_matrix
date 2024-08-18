@@ -8,7 +8,6 @@ add_executable(matrix
         src/s21_matrix.c
         src/main.c
         src/helpers.c
-
 )
 # Линковка с библиотеками math и check
 target_link_libraries(matrix m check)
