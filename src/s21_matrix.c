@@ -160,6 +160,4 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
   }
   return code;
 }
-int s21_determinant(matrix_t *A, double *result){
-
-}
+int s21_determinant(matrix_t *A, double *result) {}
