@@ -3,9 +3,9 @@
 - [x] eq_matrix (сравнение)
 - [x] sum_matrix (сложение)
 - [x] sub_matrix (вычитание)
-- [ ] mult_matrix (умножение)
-- [ ] mult_number (умножение на число)
-- [ ] transpose (транспонирование)
+- [x] mult_matrix (умножение)
+- [x] mult_number (умножение на число)
+- [x] transpose (транспонирование)
 - [ ] determinant (вычисление определителя)
 - [ ] calc_complements (вычисление матрицы алгебраических дополнений)
 - [ ] inverse_matrix (поиск обратной матрицы).
