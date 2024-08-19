@@ -12,6 +12,7 @@
 *.map
 *.exp
 
+build/
 .idea/
 .vscode/
 cmake-build-debug/
