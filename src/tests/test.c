@@ -1,15 +1,12 @@
 #include "test.h"
 int main(void) {
   int all = 0, successed = 0, failed = 0;
-  Suite *suite[] = {//          suite_s21_matrix_create(),
-                    //                    suite_s21_matrix_remove(),
-                    //                    suite_s21_matrix_equals(),
-                    //                    suite_s21_matrix_sum(),
-                    //                    suite_s21_matrix_sub(),
-                    //                    suite_s21_matrix_mult_number(),
-                    //                    suite_s21_matrix_mult(),
-                    //                    suite_s21_matrix_transpose(),
-                    suite_s21_matrix_tests(), NULL};
+  Suite *suite[] = {suite_s21_matrix_create(),  suite_s21_matrix_remove(),
+                    suite_s21_matrix_equals(),  suite_s21_matrix_sum(),
+                    suite_s21_matrix_sub(),     suite_s21_matrix_mult_number(),
+                    suite_s21_matrix_mult(),    suite_s21_matrix_transpose(),
+                    suite_s21_matrix_det(),     suite_s21_matrix_calc_comp(),
+                    suite_s21_matrix_inverse(), NULL};
 
   for (int i = 0; suite[i] != NULL; i++) {
     SRunner *sr = srunner_create(suite[i]);

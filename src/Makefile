@@ -27,8 +27,7 @@ s21_matrix.o: ${SOURCE} $(HEADERS)
 
 test: clean s21_matrix.a
 	gcc $(LDFLAGS) $(TESTS_SOURCE)   s21_matrix.a $(ADD_LIB) -o test -lcheck
-	./test 
-	# >> logs_test/bank_w.txt
+	./test
 
 gcov_report:
 	gcc --coverage $(SOURCE) $(TESTS_SOURCE)   -o gcov_test $(ADD_LIB) -lcheck

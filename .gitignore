@@ -15,8 +15,12 @@
 build/
 .idea/
 .vscode/
+src/*.txt
+src/main.c
+src/helpers*
+src/TODO.md
 cmake-build-debug/
-#CMakeLists.txt
+CMakeLists.txt
 
 # Precompiled Headers
 *.gch

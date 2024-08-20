@@ -176,22 +176,17 @@ int s21_determinant(matrix_t *A, double *result) {
   } else if (code == OK && scale > 2) {
     double det = 0;
     for (int i = 0; i < A->rows; i++) {
-     // printf("scale = %d\n", scale);
       double tmp = A->matrix[0][i];
-      //printf("__________________\n");
-
-      // printf("tmp: %lf\n", tmp);
 
       matrix_t minor = get_minor(*A, 0, i);
-//      printf("__________________\n");
-      // out_matrix(minor);
-      if(tmp != 0)code = s21_determinant(&minor, &det);
-      else det = 0;
-      // out_matrix(minor);
+      if (tmp != 0)
+        code = s21_determinant(&minor, &det);
+      else
+        det = 0;
+
       int sign = (i) % 2 == 0 ? 1 : -1;
       *result += det * tmp * sign;
       det = 0;
-      // printf("det: %lf\n%d\n", det * tmp * sign, code);
     }
   }
 
@@ -199,25 +194,82 @@ int s21_determinant(matrix_t *A, double *result) {
 }
 
 matrix_t get_minor(matrix_t A, int i, int j) {
-  int scale = A.rows - 1;
+  int scale = A.rows;
   matrix_t b = {};
-  int m = 0, n = 0;  // счетчики для минора
-  int code = s21_create_matrix(scale, scale, &b);
-  for (int k = 0; code == OK && k < A.rows; k++) {
-    if (k == i) {
-      continue;
-    }
-    n = 0;
-    for (int g = 0; g < A.columns; g++) {
-      if (g == j) {
+  if (A.rows > 1) {
+    scale = A.rows - 1;
+    int m = 0, n = 0;  // счетчики для минора
+    int code = s21_create_matrix(scale, scale, &b);
+    for (int k = 0; code == OK && k < A.rows; k++) {
+      if (k == i) {
         continue;
       }
-      double tmp = A.matrix[k][g];
-      b.matrix[m][n] = tmp;
-      n++;
+      n = 0;
+      for (int g = 0; g < A.columns; g++) {
+        if (g == j) {
+          continue;
+        }
+        double tmp = A.matrix[k][g];
+        b.matrix[m][n] = tmp;
+        n++;
+      }
+      //    if (m < scale)
+      m++;
     }
-    //    if (m < scale)
-    m++;
+  } else {
+    s21_create_matrix(1, 1, &b);
+    int sign = (i + j + 2) % 2 == 0 ? 1 : -1;
+    b.matrix[0][0] = 1 * sign;
   }
   return b;
 };
+
+int s21_calc_complements(matrix_t *A, matrix_t *result) {
+  int code = is_matrix_correct(A);
+
+  if (code == OK && A->rows == A->columns) {
+    int rows = A->rows, columns = A->columns;
+    code = s21_create_matrix(rows, columns, result);
+    for (int i = 0; code == OK && i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
+        double det = 0;
+        matrix_t minor = get_minor(*A, i, j);
+
+        code = s21_determinant(&minor, &det);
+        int sign = (i + j + 2) % 2 == 0 ? 1 : -1;
+        result->matrix[i][j] = det * sign;
+      }
+    }
+  } else if (code == OK) {
+    code = CALC_ERROR;
+  }
+  return code;
+}
+int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
+  int code = is_matrix_correct(A) == OK && A->rows == A->columns ? OK
+             : is_matrix_correct(A) == ERROR                     ? ERROR
+                                                                 : CALC_ERROR;
+  double det = 0;
+  matrix_t calc_comp = {};
+  matrix_t calc_comp_tr = {};
+
+  if (code == OK) {
+    code = s21_determinant(A, &det);
+  }
+  if (code == OK && det != 0) {
+    code = s21_calc_complements(A, &calc_comp);
+
+    code = s21_transpose(&calc_comp, &calc_comp_tr);
+
+    code = s21_create_matrix(calc_comp_tr.rows, calc_comp_tr.columns, result);
+    for (int i = 0; i < result->rows; i++) {
+      for (int j = 0; j < result->columns; j++) {
+        double tmp = 1 / det;
+        result->matrix[i][j] = calc_comp_tr.matrix[i][j] * tmp;
+      }
+    }
+  } else if (code == OK) {
+    code = CALC_ERROR;
+  }
+  return code;
+}

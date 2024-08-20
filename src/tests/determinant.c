@@ -138,7 +138,7 @@ START_TEST(determinant_9) {
 }
 END_TEST
 
-Suite *suite_s21_matrix_tests(void) {
+Suite *suite_s21_matrix_det(void) {
   Suite *s1 = suite_create("DETERMINANT");
   TCase *tc1_1 = tcase_create("Core");
   suite_add_tcase(s1, tc1_1);
