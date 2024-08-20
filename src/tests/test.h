@@ -15,4 +15,5 @@ Suite *suite_s21_matrix_sub(void);
 Suite *suite_s21_matrix_mult_number(void);
 Suite *suite_s21_matrix_mult(void);
 Suite *suite_s21_matrix_transpose(void);
+Suite *suite_s21_matrix_tests(void);
 #endif //S21_TESTS_H

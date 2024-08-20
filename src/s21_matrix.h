@@ -39,4 +39,6 @@ double mult_vectors_sum(matrix_t A, matrix_t B, int i, int j);
 
 int s21_transpose(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
+
+matrix_t get_minor(matrix_t A, int i, int j);
 #endif  // S21_MATRIX_H

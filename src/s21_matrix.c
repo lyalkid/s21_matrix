@@ -1,5 +1,7 @@
 #include "s21_matrix.h"
 
+#include "helpers.h"
+
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
   if (rows <= 0 || columns <= 0 || !result) return ERROR;
   result->columns = columns;
@@ -160,4 +162,62 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
   }
   return code;
 }
-int s21_determinant(matrix_t *A, double *result) {}
+int s21_determinant(matrix_t *A, double *result) {
+  int code = is_matrix_correct(A) == OK && A->rows == A->columns && result ? OK
+             : is_matrix_correct(A) == ERROR || !result ? ERROR
+                                                        : CALC_ERROR;
+  int scale;
+  if (code == OK) scale = A->rows;
+  if (code == OK && scale == 2) {
+    *result =
+        A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
+  } else if (code == OK && scale == 1) {
+    *result = A->matrix[0][0];
+  } else if (code == OK && scale > 2) {
+    double det = 0;
+    for (int i = 0; i < A->rows; i++) {
+     // printf("scale = %d\n", scale);
+      double tmp = A->matrix[0][i];
+      //printf("__________________\n");
+
+      // printf("tmp: %lf\n", tmp);
+
+      matrix_t minor = get_minor(*A, 0, i);
+//      printf("__________________\n");
+      // out_matrix(minor);
+      if(tmp != 0)code = s21_determinant(&minor, &det);
+      else det = 0;
+      // out_matrix(minor);
+      int sign = (i) % 2 == 0 ? 1 : -1;
+      *result += det * tmp * sign;
+      det = 0;
+      // printf("det: %lf\n%d\n", det * tmp * sign, code);
+    }
+  }
+
+  return code;
+}
+
+matrix_t get_minor(matrix_t A, int i, int j) {
+  int scale = A.rows - 1;
+  matrix_t b = {};
+  int m = 0, n = 0;  // счетчики для минора
+  int code = s21_create_matrix(scale, scale, &b);
+  for (int k = 0; code == OK && k < A.rows; k++) {
+    if (k == i) {
+      continue;
+    }
+    n = 0;
+    for (int g = 0; g < A.columns; g++) {
+      if (g == j) {
+        continue;
+      }
+      double tmp = A.matrix[k][g];
+      b.matrix[m][n] = tmp;
+      n++;
+    }
+    //    if (m < scale)
+    m++;
+  }
+  return b;
+};
