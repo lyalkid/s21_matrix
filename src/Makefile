@@ -40,7 +40,7 @@ gcov_report:
 	$(OPEN_CMD) ./report/index.html
 
 valg:
-	valgrind --tool=memcheck --leak-check=yes --track-origins=yes --leak-check=full --show-leak-kinds=all -s ./main
+	valgrind --tool=memcheck --leak-check=yes --track-origins=yes --leak-check=full --show-leak-kinds=all -s ./test
 
 leaks:
 	leaks -atExit -- ./test
@@ -60,4 +60,22 @@ style:
 
 rebuild: clean all
 
+# Собираем docker image с тегом 'v1' на основании dockerfile и создаем контейнер
+docker_build:
+	cp ../materials/linters/.clang-format ./
+	docker build -t vault:v1 .
+	docker create -it --name matrix vault:v1
+
+# Запускаем контейнер
+docker_start:
+	docker start -i matrix
+
+docker_delete:
+	docker rm matrix
+	docker image rm vault:v1
+
+
+mini_verter:
+	cd ../materials/build/ && chmod +x run.sh && sh run.sh
+	cd ../src
 

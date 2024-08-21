@@ -179,11 +179,12 @@ int s21_determinant(matrix_t *A, double *result) {
       double tmp = A->matrix[0][i];
 
       matrix_t minor = get_minor(*A, 0, i);
-      if (tmp != 0)
+      if (tmp != 0) {
         code = s21_determinant(&minor, &det);
-      else
+      } else {
         det = 0;
-
+      }
+      s21_remove_matrix(&minor);
       int sign = (i) % 2 == 0 ? 1 : -1;
       *result += det * tmp * sign;
       det = 0;
@@ -236,6 +237,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
         matrix_t minor = get_minor(*A, i, j);
 
         code = s21_determinant(&minor, &det);
+        s21_remove_matrix(&minor);
         int sign = (i + j + 2) % 2 == 0 ? 1 : -1;
         result->matrix[i][j] = det * sign;
       }
@@ -268,6 +270,8 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
         result->matrix[i][j] = calc_comp_tr.matrix[i][j] * tmp;
       }
     }
+    s21_remove_matrix(&calc_comp);
+    s21_remove_matrix(&calc_comp_tr);
   } else if (code == OK) {
     code = CALC_ERROR;
   }
