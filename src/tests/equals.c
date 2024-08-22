@@ -1,5 +1,4 @@
 #include "test.h"
-// S21_EQ_MATRIX
 
 START_TEST(eq_matrix_1) {
   matrix_t A = {0};

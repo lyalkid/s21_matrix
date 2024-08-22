@@ -4,8 +4,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../s21_matrix.h"
 
+#include "../s21_matrix.h"
 
 Suite *suite_s21_matrix_sum(void);
 Suite *suite_s21_matrix_create(void);
@@ -18,4 +18,4 @@ Suite *suite_s21_matrix_transpose(void);
 Suite *suite_s21_matrix_det(void);
 Suite *suite_s21_matrix_calc_comp(void);
 Suite *suite_s21_matrix_inverse(void);
-#endif //S21_TESTS_H
+#endif  // S21_TESTS_H

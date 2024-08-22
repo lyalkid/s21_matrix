@@ -1,7 +1,5 @@
 #include "test.h"
 
-// S21_INVERSE_MATRIX //
-
 START_TEST(inverse_matrix_1) {
   matrix_t A = {0};
   matrix_t res = {0};
@@ -29,7 +27,7 @@ START_TEST(inverse_matrix_1) {
   correct.matrix[2][2] = 0.0392157;
   int ret_value = s21_inverse_matrix(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -78,7 +76,7 @@ START_TEST(inverse_matrix_2) {
   correct.matrix[3][3] = 0.3333333;
   int ret_value = s21_inverse_matrix(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -91,7 +89,7 @@ START_TEST(inverse_matrix_3) {
   matrix_t res = {0};
   s21_create_matrix(4, 3, &A);
   int ret_value = s21_inverse_matrix(&A, &res);
-  ck_assert_int_eq(ret_value, S21_CALC_ERROR);
+  ck_assert_int_eq(ret_value, CALC_ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -102,7 +100,7 @@ START_TEST(inverse_matrix_4) {
   matrix_t res = {0};
   s21_create_matrix(4, 0, &A);
   int ret_value = s21_inverse_matrix(&A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -118,7 +116,7 @@ START_TEST(inverse_matrix_5) {
   correct.matrix[0][0] = 0.0208333;
   int ret_value = s21_inverse_matrix(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -135,7 +133,7 @@ START_TEST(inverse_matrix_6) {
   A.matrix[1][0] = 1;
   A.matrix[1][1] = 2;
   int ret_value = s21_inverse_matrix(&A, &res);
-  ck_assert_int_eq(ret_value, S21_CALC_ERROR);
+  ck_assert_int_eq(ret_value, CALC_ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -146,7 +144,7 @@ START_TEST(inverse_matrix_7) {
   matrix_t res = {0};
   s21_create_matrix(2, 2, A);
   int ret_value = s21_inverse_matrix(A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&res);
 }
 END_TEST

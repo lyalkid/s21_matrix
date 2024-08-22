@@ -1,5 +1,4 @@
 #include "test.h"
-// S21_MULT_NUMBER //
 
 START_TEST(mult_number_1) {
   matrix_t A = {0};
@@ -24,7 +23,7 @@ START_TEST(mult_number_1) {
   }
   int ret_value = s21_mult_number(&A, value, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -55,7 +54,7 @@ START_TEST(mult_number_2) {
   }
   int ret_value = s21_mult_number(&A, value, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -86,7 +85,7 @@ START_TEST(mult_number_3) {
   }
   int ret_value = s21_mult_number(&A, value, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -100,7 +99,7 @@ START_TEST(mult_number_4) {
   s21_create_matrix(0, 3, &A);
   double value = 1.3;
   int ret_value = s21_mult_number(&A, value, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -112,7 +111,7 @@ START_TEST(mult_number_5) {
   s21_create_matrix(0, 3, &A);
   double value = NAN;
   int ret_value = s21_mult_number(&A, value, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -141,7 +140,7 @@ START_TEST(mult_number_6) {
   }
   int ret_value = s21_mult_number(&A, value, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -155,7 +154,7 @@ START_TEST(mult_number_7) {
   s21_create_matrix(3, 3, &A);
   double value = 0;
   int ret_value = s21_mult_number(&A, value, res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -166,7 +165,7 @@ START_TEST(mult_number_8) {
   s21_create_matrix(3, 3, A);
   double value = 0;
   int ret_value = s21_mult_number(A, value, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&res);
 }
 END_TEST

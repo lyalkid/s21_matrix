@@ -1,6 +1,6 @@
 
 #include "test.h"
-// S21_SUM_MATRIX //
+
 START_TEST(sum_matrix_1) {
   matrix_t A = {0};
   matrix_t B = {0};
@@ -31,7 +31,7 @@ START_TEST(sum_matrix_1) {
   }
   int ret_value = s21_sum_matrix(&A, &B, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
@@ -71,7 +71,7 @@ START_TEST(sum_matrix_2) {
   }
   int ret_value = s21_sum_matrix(&A, &B, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
@@ -87,7 +87,7 @@ START_TEST(sum_matrix_3) {
   s21_create_matrix(2, 2, &A);
   s21_create_matrix(3, 3, &B);
   int ret_value = s21_sum_matrix(&A, &B, &res);
-  ck_assert_int_eq(ret_value, S21_CALC_ERROR);
+  ck_assert_int_eq(ret_value, CALC_ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
   s21_remove_matrix(&res);
@@ -101,7 +101,7 @@ START_TEST(sum_matrix_4) {
   s21_create_matrix(0, 2, &A);
   s21_create_matrix(3, 3, &B);
   int ret_value = s21_sum_matrix(&A, &B, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
   s21_remove_matrix(&res);
@@ -115,7 +115,7 @@ START_TEST(sum_matrix_5) {
   s21_create_matrix(0, 2, &A);
   s21_create_matrix(3, 3, &B);
   int ret_value = s21_sum_matrix(&A, &B, res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
 }
@@ -128,7 +128,7 @@ START_TEST(sum_matrix_6) {
   s21_create_matrix(0, 2, A);
   s21_create_matrix(3, 3, &B);
   int ret_value = s21_sum_matrix(A, &B, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&B);
   s21_remove_matrix(&res);
 }

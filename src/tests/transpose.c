@@ -1,7 +1,5 @@
 #include "test.h"
 
-//   // S21_TRANSPOSE //
-//
 START_TEST(transpose_1) {
   matrix_t A = {0};
   matrix_t res = {0};
@@ -24,7 +22,7 @@ START_TEST(transpose_1) {
   }
   int ret_value = s21_transpose(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -54,7 +52,7 @@ START_TEST(transpose_2) {
   }
   int ret_value = s21_transpose(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -67,7 +65,7 @@ START_TEST(transpose_3) {
   matrix_t res = {0};
   s21_create_matrix(2, -2, &A);
   int ret_value = s21_transpose(&A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -94,7 +92,7 @@ START_TEST(transpose_4) {
     }
   }
   int ret_value = s21_transpose(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
   s21_remove_matrix(&correct);
@@ -106,7 +104,7 @@ START_TEST(transpose_5) {
   matrix_t *res = NULL;
   s21_create_matrix(1, 1, &A);
   int ret_value = s21_transpose(&A, res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -116,7 +114,7 @@ START_TEST(transpose_6) {
   matrix_t res = {0};
   s21_create_matrix(1, 1, A);
   int ret_value = s21_transpose(A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&res);
 }
 END_TEST

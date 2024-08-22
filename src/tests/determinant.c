@@ -1,7 +1,5 @@
 #include "test.h"
 
-//   // S21_DETERMINANT //
-
 START_TEST(determinant_1) {
   matrix_t A = {0};
   double res = 0;
@@ -15,7 +13,7 @@ START_TEST(determinant_1) {
     }
   }
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_double_eq(res, correct);
   s21_remove_matrix(&A);
 }
@@ -43,7 +41,7 @@ START_TEST(determinant_2) {
   A.matrix[3][2] = 0;
   A.matrix[3][3] = 3;
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_double_eq(res, correct);
   s21_remove_matrix(&A);
 }
@@ -64,7 +62,7 @@ START_TEST(determinant_3) {
   A.matrix[2][1] = 8;
   A.matrix[2][2] = 9;
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_double_eq(res, correct);
   s21_remove_matrix(&A);
 }
@@ -77,7 +75,7 @@ START_TEST(determinant_4) {
   s21_create_matrix(1, 1, &A);
   A.matrix[0][0] = 85.656;
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_double_eq(res, correct);
   s21_remove_matrix(&A);
 }
@@ -88,7 +86,7 @@ START_TEST(determinant_5) {
   double res = 0;
   s21_create_matrix(1, 2, &A);
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_CALC_ERROR);
+  ck_assert_int_eq(ret_value, CALC_ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -98,7 +96,7 @@ START_TEST(determinant_6) {
   double res = 0;
   s21_create_matrix(2, 0, &A);
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -113,7 +111,7 @@ START_TEST(determinant_7) {
   A.matrix[1][0] = 1;
   A.matrix[1][1] = 2;
   int ret_value = s21_determinant(&A, &res);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_double_eq(res, correct);
   s21_remove_matrix(&A);
 }
@@ -124,7 +122,7 @@ START_TEST(determinant_8) {
   double *res = NULL;
   s21_create_matrix(2, 2, &A);
   int ret_value = s21_determinant(&A, res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -134,7 +132,7 @@ START_TEST(determinant_9) {
   double res = 0;
   s21_create_matrix(2, 2, A);
   int ret_value = s21_determinant(A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
 }
 END_TEST
 

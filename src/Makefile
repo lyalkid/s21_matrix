@@ -2,7 +2,7 @@ CFLAGS = -c -Wall -Werror -Wextra -std=c11
 LDFLAGS = -Wall -Werror -Wextra -std=c11
 HEADERS = $(wildcard s21_*.h)
 SOURCE = $(wildcard s21_*.c )
-TESTS_SOURCE = $(wildcard tests/*.c)
+TESTS_SOURCE = $(wildcard tests/*.c tests/*.h)
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)

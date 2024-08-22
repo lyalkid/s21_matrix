@@ -1,6 +1,5 @@
 #include "test.h"
 
-// S21_CALC_COMPLEMENTS //
 START_TEST(calc_complements_1) {
   matrix_t A = {0};
   matrix_t res = {0};
@@ -28,7 +27,7 @@ START_TEST(calc_complements_1) {
   correct.matrix[2][2] = 8;
   int ret_value = s21_calc_complements(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -77,7 +76,7 @@ START_TEST(calc_complements_2) {
   correct.matrix[3][3] = -20;
   int ret_value = s21_calc_complements(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -90,7 +89,7 @@ START_TEST(calc_complements_3) {
   matrix_t res = {0};
   s21_create_matrix(4, 3, &A);
   int ret_value = s21_calc_complements(&A, &res);
-  ck_assert_int_eq(ret_value, S21_CALC_ERROR);
+  ck_assert_int_eq(ret_value, CALC_ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -101,7 +100,7 @@ START_TEST(calc_complements_4) {
   matrix_t res = {0};
   s21_create_matrix(4, 0, &A);
   int ret_value = s21_calc_complements(&A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
 }
@@ -117,7 +116,7 @@ START_TEST(calc_complements_5) {
   correct.matrix[0][0] = 1;
   int ret_value = s21_calc_complements(&A, &res);
   int equal = s21_eq_matrix(&res, &correct);
-  ck_assert_int_eq(ret_value, S21_OK);
+  ck_assert_int_eq(ret_value, OK);
   ck_assert_int_eq(equal, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&res);
@@ -130,7 +129,7 @@ START_TEST(calc_complements_6) {
   matrix_t *res = NULL;
   s21_create_matrix(1, 1, &A);
   int ret_value = s21_calc_complements(&A, res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -140,7 +139,7 @@ START_TEST(calc_complements_7) {
   matrix_t res = {0};
   s21_create_matrix(2, 2, A);
   int ret_value = s21_calc_complements(A, &res);
-  ck_assert_int_eq(ret_value, S21_INCORRECT);
+  ck_assert_int_eq(ret_value, ERROR);
   s21_remove_matrix(&res);
 }
 END_TEST
