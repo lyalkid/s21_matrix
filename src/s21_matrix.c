@@ -164,7 +164,7 @@ int s21_determinant(matrix_t *A, double *result) {
   int code = is_matrix_correct(A) == OK && A->rows == A->columns && result ? OK
              : is_matrix_correct(A) == ERROR || !result ? ERROR
                                                         : CALC_ERROR;
-  int scale;
+  int scale = 0;
   if (code == OK) scale = A->rows;
   if (code == OK && scale == 2) {
     *result =
