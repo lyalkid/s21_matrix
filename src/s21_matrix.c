@@ -161,7 +161,7 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
   return code;
 }
 int s21_determinant(matrix_t *A, double *result) {
-  if(result)*result = 0 ;  
+  if (result) *result = 0;
   int code1 = is_matrix_correct(A);
   int code = code1 == OK && A->rows == A->columns && result != NULL ? OK
              : code1 == ERROR || result == NULL                     ? ERROR
